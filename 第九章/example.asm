@@ -1,5 +1,7 @@
 assume cs:codesg
 
+;复制的是相对位移
+
 codesg segment
 	
 	mov ax, 4c00h
