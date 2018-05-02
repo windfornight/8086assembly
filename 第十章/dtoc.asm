@@ -17,19 +17,6 @@ start:
 	mov cl, 2
 	call show_str
 	
-	mov ax, 22666
-	mov bx, data
-	mov ds, bx
-	mov si, 0
-	call dtoc
-	
-	mov dh, 9
-	mov dl, 3
-	mov cl, 2
-	call show_str
-	
-	
-	
 	mov ax, 4c00h
 	int 21h
 	
@@ -117,7 +104,8 @@ numSplit:
 	push cx
 	mov cx, ax
 	jcxz numToStr   ;为什么丢掉了1
-	loop numSplit
+	mov cx, 10
+	loop numSplit ;loop 的时候出大事了
 
 ;出栈
 numToStr:
