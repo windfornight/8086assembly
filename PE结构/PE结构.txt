@@ -1,0 +1,132 @@
+-------DOS头----------
+typedef struct _IMAGE_DOS_HEADER { 
+WORD e_magic; // 魔术数字  00h (5A 4D)
+WORD e_cblp; // 文件最后页的字节数 02h 
+WORD e_cp; // 文件页数 04h
+WORD e_crlc; // 重定义元素个数 06h 2
+WORD e_cparhdr; // 头部尺寸，以段落为单位 08h
+WORD e_minalloc; // 所需的最小附加段 0Ah
+WORD e_maxalloc; // 所需的最大附加段 0Ch
+WORD e_ss; // 初始的SS 值(相对偏移量) 0Eh
+WORD e_sp; // 初始的SP 值  10h
+WORD e_csum; // 校验和  12h
+WORD e_ip; // 初始的IP 值 14h
+WORD e_cs; // 初始的CS 值(相对偏移量) 16h
+WORD e_lfarlc; // 重分配表文件地址 18h
+WORD e_ovno; // 覆盖号 1Ah
+WORD e_res[4]; // 保留字 1Ch
+WORD e_oemid; // OEM 标识符(相对e_oeminfo) 24h
+WORD e_oeminfo; // OEM 信息 26h
+WORD e_res2[10]; // 保留字 28h
+LONG e_lfanew; // 新exe 头部的文件地址 3Ch(最后四个字节，最终会8字节对齐)
+} IMAGE_DOS_HEADER, *PIMAGE_DOS_HEADER;
+
+
+
+
+---------NT头--------------
+IMAGE_NT_HEADERS STRUCT
+
+  Signature          DWORD                       ?       ；PE文件标识  00 00 45 50
+
+  FileHeader         IMAGE_FILE_HEADER        <>
+
+  OptionalHeader    IMAGE_OPTIONAL_HEADER32 <>
+
+IMAGE_NT_HEADERS ENDS
+
+
+
+-----PE头------------
+IMAGE_FILE_HEADER STRUCT
+
+  Machine                  WORD    ?    ；0004h - 运行平台    01 4C
+
+  NumberOfSections      WORD    ?    ；0006h - 文件的节数目   00 06
+
+  TimeDateStamp           DWORD   ?   ；0008h - 文件创建日期和时间  0A D9 24 29
+
+  PointerToSymbolTable  DWORD   ?   ；000ch - 指向符号表（用于调试）00  00 00 00
+
+  NumberOfSymbols       DWORD   ?   ；0010h - 符号表中的符号数量（用于调试）00 00 00 00
+
+  SizeOfOptionalHeader  WORD    ?      ；0014h - IMAGE_OPTIONAL_HEADER32结构的长度  00 E0
+
+  Characteristics       WORD    ?    ；0016h - 文件属性   81 8E
+
+IMAGE_FILE_HEADER ENDS
+
+
+
+============可选PE头===========
+IMAGE_OPTIONAL_HEADER32 STRUCT
+
+  Magic                                 WORD  ? ;0018h 107h＝ROM Image,10Bh=exe Image
+
+  MajorLinkerVersion              BYTE  ? ;001ah 链接器版本号
+
+  MinorLinkerVersion              BYTE  ? ;001bh
+
+  SizeOfCode                           DWORD ? ;001ch 所有含代码的节的总大小
+
+  SizeOfInitializedData           DWORD? ;0020h所有含已初始化数据的节的总大小
+
+  SizeOfUninitializedData       DWORD ? ;0024h 所有含未初始化数据的节的大小
+
+  AddressOfEntryPoint             DWORD ? ;0028h 程序执行入口RVA
+
+  BaseOfCode                           DWORD ? ;002ch 代码的节的起始RVA
+
+  BaseOfData                           DWORD ? ;0030h 数据的节的起始RVA
+
+  ImageBase                            DWORD ? ;0034h 程序的建议装载地址
+
+  SectionAlignment                DWORD ? ;0038h 内存中的节的对齐粒度
+
+  FileAlignment                    DWORD ? ;003ch 文件中的节的对齐粒度
+
+  MajorOperatingSystemVersion   WORD  ? ;0040h 操作系统主版本号
+
+  MinorOperatingSystemVersion   WORD  ? ;0042h 操作系统副版本号
+
+  MajorImageVersion               WORD  ? ;0044h可运行于操作系统的最小版本号
+
+  MinorImageVersion               WORD  ? ;0046h
+
+  MajorSubsystemVersion           WORD ?;0048h 可运行于操作系统的最小子版本号
+
+  MinorSubsystemVersion           WORD  ? ;004ah
+
+  Win32VersionValue               DWORD ? ;004ch 未用
+
+  SizeOfImage                      DWORD ? ;0050h 内存中整个PE映像尺寸
+
+  SizeOfHeaders                    DWORD ? ;0054h 所有头＋节表的大小
+
+  CheckSum                              DWORD ? ;0058h
+  
+  Subsystem                            WORD  ? ;005ch 文件的子系统
+
+  DllCharacteristics              WORD  ? ;005eh
+
+  SizeOfStackReserve             DWORD ? ;0060h 初始化时的堆栈大小
+
+  SizeOfStackCommit              DWORD ? ;0064h 初始化时实际提交的堆栈大小
+
+  SizeOfHeapReserve              DWORD ? ;0068h 初始化时保留的堆大小
+
+  SizeOfHeapCommit                DWORD ? ;006ch 初始化时实际提交的堆大小
+
+  LoaderFlags                      DWORD ? ;0070h 未用
+
+  NumberOfRvaAndSizes             DWORD ? ;0074h 下面的数据目录结构的数量
+
+  DataDirectory                    IMAGE_DATA_DIRECTORY 16 dup(<>) ;0078h
+
+IMAGE_OPTIONAL_HEADER32 ENDS
+
+
+
+
+
+
