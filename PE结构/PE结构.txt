@@ -136,6 +136,38 @@ IMAGE_DATA_DIRECTORY STRUCT
 IMAGE_DATA_DIRECTORY ENDS
 
 
+-----------------------节表----------------------------
+IMAGE_SECTION_HEADER STRUCT
+
+    Name1 db IMAGE_SIZEOF_SHORT_NAME dup(?)  ；8个字节的节区名称
+
+    union Misc
+
+        PhysicalAddress dd    ?
+
+        VirtualSize dd        ?               ；节区的尺寸
+
+    ends
+
+    VirtualAddress dd         ?               ；节区的RVA地址
+
+    SizeOfRawData dd          ?               ；在文件中对齐后的尺寸
+
+    PointerToRawData dd     ?               ；在文件中的偏移
+
+    PointerToRelocations dd ?               ；在OBJ文件中使用
+
+    PointerToLinenumbers dd ?               ；行号表的位置（供调试用）
+
+    NumberOfRelocations dw  ?               ；在OBJ文件中使用
+
+    NumberOfLinenumbers dw  ?               ；行号表中行号的数量
+
+    Characteristics dd        ?               ；节的属性
+
+IMAGE_SECTION_HEADER ENDS
+
+
 
 
 
