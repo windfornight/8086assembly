@@ -126,6 +126,17 @@ IMAGE_OPTIONAL_HEADER32 STRUCT
 IMAGE_OPTIONAL_HEADER32 ENDS
 
 
+----------------image data directory----------------
+IMAGE_DATA_DIRECTORY STRUCT
+
+  VirtualAddress    DWORD      ?  ；数据的起始RVA
+
+  isize               DWORD      ? ；数据块的长度
+
+IMAGE_DATA_DIRECTORY ENDS
+
+
+
 
 
 
